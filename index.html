@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ambrosia Infotech — System Integrator | New Delhi</title>
+    <meta name="description" content="Premier AV, IT, Broadcast & Telecom system integrator. Based in New Delhi, serving India.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        body: ['Barlow', 'sans-serif'],
+                        heading: ['"Instrument Serif"', 'serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        :root {
+            --accent: #a4d65e;
+            --bg: #060606;
+        }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Barlow', sans-serif;
+            background: var(--bg);
+            color: #e0e0e0;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* ============================================
+           GENERATIVE ART BACKGROUND
+           Flowing organic mesh — visible, mesmerizing
+           ============================================ */
+        #art-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        /* ============================================
+           EDITORIAL GRID
+           ============================================ */
+        .grid-lines {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            display: none;
+        }
+        @media (min-width: 1024px) { .grid-lines { display: block; } }
+        .grid-lines div {
+            position: absolute;
+            top: 0; bottom: 0;
+            width: 1px;
+            background: rgba(255,255,255,0.02);
+        }
+        
+        /* ============================================
+           GLASS SYSTEM
+           ============================================ */
+        .card {
+            background: rgba(255,255,255,0.018);
+            border: 1px solid rgba(255,255,255,0.06);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.03), 0 4px 24px rgba(0,0,0,0.2);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .card:hover {
+            background: rgba(255,255,255,0.035);
+            border-color: rgba(164, 214, 94, 0.2);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 8px 40px rgba(0,0,0,0.3), 0 0 60px rgba(164,214,94,0.04);
+            transform: translateY(-2px);
+        }
+        
+        .lg {
+            background: rgba(255,255,255,0.01);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.07);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+        }
+        
+        /* ============================================
+           LOGO
+           ============================================ */
+        .logo-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            width: 22px;
+        }
+        .logo-bars span {
+            display: block;
+            height: 3.5px;
+            width: 100%;
+            border-radius: 2px;
+            background: var(--accent);
+        }
+        
+        /* ============================================
+           SCROLL REVEAL
+           ============================================ */
+        .sr {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1);
+        }
+        .sr.in { opacity: 1; transform: translateY(0); }
+        .sr-d1 { transition-delay: 0.12s; }
+        .sr-d2 { transition-delay: 0.24s; }
+        .sr-d3 { transition-delay: 0.36s; }
+        
+        /* ============================================
+           HERO
+           ============================================ */
+        .hero-line {
+            overflow: hidden;
+        }
+        .hero-line span {
+            display: block;
+            transform: translateY(110%);
+            animation: lineUp 1.2s cubic-bezier(0.16,1,0.3,1) forwards;
+        }
+        .hero-line:nth-child(1) span { animation-delay: 0.3s; }
+        .hero-line:nth-child(2) span { animation-delay: 0.45s; }
+        .hero-line:nth-child(3) span { animation-delay: 0.6s; }
+        @keyframes lineUp {
+            to { transform: translateY(0); }
+        }
+        
+        .hero-underline {
+            position: relative;
+            display: inline-block;
+        }
+        .hero-underline::after {
+            content: '';
+            position: absolute;
+            bottom: 0.05em;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            animation: underlineDraw 0.8s cubic-bezier(0.16,1,0.3,1) 1.1s forwards;
+        }
+        @keyframes underlineDraw {
+            to { width: 100%; }
+        }
+        
+        /* ============================================
+           WORK CARDS
+           ============================================ */
+        .work-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            aspect-ratio: 16/10;
+        }
+        .work-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--card-grad-1, #1a1a1a), var(--card-grad-2, #0d1208));
+            transition: transform 8s ease;
+        }
+        .work-card:hover::before {
+            transform: scale(1.08);
+        }
+        .work-card .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
+        }
+        .work-card .content {
+            position: absolute;
+            bottom: 0;
+            left: 0; right: 0;
+            padding: 32px;
+            transform: translateY(6px);
+            transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+        }
+        .work-card:hover .content {
+            transform: translateY(0);
+        }
+        .work-card .tags {
+            opacity: 0;
+            transform: translateY(8px);
+            transition: all 0.4s ease 0.08s;
+        }
+        .work-card:hover .tags {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* ============================================
+           TIMELINE
+           ============================================ */
+        .timeline-track {
+            position: absolute;
+            left: 24px;
+            top: 0; bottom: 0;
+            width: 1px;
+            background: rgba(255,255,255,0.06);
+        }
+        .timeline-fill {
+            position: absolute;
+            left: 24px;
+            top: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, var(--accent), rgba(164,214,94,0.15));
+            height: 0%;
+            transition: height 0.15s linear;
+        }
+        .step-node {
+            width: 12px; height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.06);
+            border: 2px solid rgba(255,255,255,0.1);
+            transition: all 0.5s cubic-bezier(0.16,1,0.3,1);
+            flex-shrink: 0;
+        }
+        .step-node.lit {
+            background: var(--accent);
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(164,214,94,0.25), 0 0 40px rgba(164,214,94,0.08);
+        }
+        
+        /* ============================================
+           TESTIMONIAL
+           ============================================ */
+        .t-slide {
+            opacity: 0;
+            position: absolute;
+            inset: 0;
+            transition: opacity 0.8s ease;
+            pointer-events: none;
+        }
+        .t-slide.on {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .t-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        .t-dot.on {
+            background: var(--accent);
+            box-shadow: 0 0 12px rgba(164,214,94,0.3);
+        }
+        
+        /* ============================================
+           MARQUEE
+           ============================================ */
+        .mq {
+            display: flex;
+            gap: 4rem;
+            animation: mq 30s linear infinite;
+            width: max-content;
+        }
+        @keyframes mq { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        
+        /* ============================================
+           NAV
+           ============================================ */
+        .nav-scrolled {
+            background: rgba(6,6,6,0.8);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+        
+        /* ============================================
+           FORM
+           ============================================ */
+        .field {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            color: #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        .field:focus {
+            outline: none;
+            border-color: rgba(164,214,94,0.25);
+            background: rgba(255,255,255,0.035);
+        }
+        
+        /* ============================================
+           BUTTONS
+           ============================================ */
+        .btn-fill {
+            background: var(--accent);
+            color: #000;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+        }
+        .btn-fill:hover {
+            background: #b8e84a;
+            box-shadow: 0 8px 30px rgba(164,214,94,0.2);
+            transform: translateY(-1px);
+        }
+        .btn-line {
+            border: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.5);
+            transition: all 0.3s ease;
+        }
+        .btn-line:hover {
+            border-color: rgba(164,214,94,0.3);
+            color: var(--accent);
+        }
+        
+        /* ============================================
+           MOBILE
+           ============================================ */
+        .mob-menu {
+            transform: translateX(100%);
+            transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+        }
+        .mob-menu.open { transform: translateX(0); }
+        
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: #1a1a1a; border-radius: 2px; }
+    </style>
+</head>
+<body>
+    <!-- Generative Art Background -->
+    <canvas id="art-canvas"></canvas>
+    
+    <!-- Grid -->
+    <div class="grid-lines">
+        <div style="left:15%"></div>
+        <div style="left:38%"></div>
+        <div style="left:62%"></div>
+        <div style="left:85%"></div>
+    </div>
+    
+    <!-- ==================== NAV ==================== -->
+    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex items-center justify-between h-[72px]">
+                <a href="#" class="flex items-center gap-3">
+                    <div class="logo-bars"><span></span><span></span><span></span></div>
+                    <span class="font-heading italic text-lg text-white tracking-tight">Ambrosia<span style="color:var(--accent)">.</span></span>
+                </a>
+                
+                <div class="hidden lg:flex items-center gap-10">
+                    <a href="#services" class="text-[13px] text-white/35 hover:text-white transition-colors duration-300 font-body tracking-wide">Services</a>
+                    <a href="#work" class="text-[13px] text-white/35 hover:text-white transition-colors duration-300 font-body tracking-wide">Work</a>
+                    <a href="#process" class="text-[13px] text-white/35 hover:text-white transition-colors duration-300 font-body tracking-wide">Process</a>
+                    <a href="#about" class="text-[13px] text-white/35 hover:text-white transition-colors duration-300 font-body tracking-wide">About</a>
+                    <a href="#contact" class="btn-fill px-5 py-2 text-[13px] rounded-full font-body tracking-wide">Get Quote</a>
+                </div>
+                
+                <button id="menu-btn" class="lg:hidden p-2 text-white">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <div id="mob-menu" class="mob-menu fixed inset-0 z-40 bg-[#060606] lg:hidden">
+        <div class="flex flex-col items-center justify-center h-full gap-10">
+            <a href="#services" class="mob-link text-3xl font-heading italic text-white">Services</a>
+            <a href="#work" class="mob-link text-3xl font-heading italic text-white">Work</a>
+            <a href="#process" class="mob-link text-3xl font-heading italic text-white">Process</a>
+            <a href="#about" class="mob-link text-3xl font-heading italic text-white">About</a>
+            <a href="#contact" class="mob-link text-3xl font-heading italic text-white">Contact</a>
+            <a href="#contact" class="btn-fill px-10 py-3 rounded-full text-base mt-4 font-body">Get Quote</a>
+        </div>
+    </div>
+    
+    <!-- ==================== HERO ==================== -->
+    <section class="relative min-h-screen flex items-end z-10 pb-20 lg:pb-32">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full pt-32">
+            <div class="max-w-4xl">
+                <div class="mb-10">
+                    <span class="inline-flex items-center gap-2 text-[11px] font-body uppercase tracking-[0.25em] text-white/25">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#a4d65e]"></span>
+                        System Integrator &middot; Est. 2010 &middot; New Delhi
+                    </span>
+                </div>
+                
+                <h1 class="font-heading italic text-white text-[clamp(3.5rem,8vw,7.5rem)] leading-[0.9] tracking-[-0.03em]">
+                    <div class="hero-line"><span>Technology</span></div>
+                    <div class="hero-line"><span>Integrated to</span></div>
+                    <div class="hero-line"><span class="hero-underline" style="color:var(--accent)">Perfection.</span></div>
+                </h1>
+                
+                <p class="mt-10 text-white/30 text-base md:text-lg font-body font-light leading-relaxed max-w-lg" style="opacity:0; animation: fadeIn 1s ease 1s forwards;">
+                    AV, IT, Broadcast & Telecom solutions engineered for India's most demanding enterprises.
+                </p>
+                
+                <div class="flex flex-wrap items-center gap-4 mt-10" style="opacity:0; animation: fadeIn 1s ease 1.2s forwards;">
+                    <a href="#services" class="btn-fill px-7 py-3 rounded-full text-sm font-body inline-flex items-center gap-2">
+                        Explore Services
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                    </a>
+                    <a href="#work" class="btn-line px-7 py-3 rounded-full text-sm font-body">View Our Work</a>
+                </div>
+                
+                <div class="flex items-center gap-12 mt-20 pt-8 border-t border-white/[0.04]" style="opacity:0; animation: fadeIn 1s ease 1.4s forwards;">
+                    <div>
+                        <div class="text-3xl md:text-4xl font-heading italic text-white tracking-tight">15<span style="color:var(--accent)">+</span></div>
+                        <div class="text-[10px] text-white/20 font-body uppercase tracking-[0.2em] mt-1">Years</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl md:text-4xl font-heading italic text-white tracking-tight">500<span style="color:var(--accent)">+</span></div>
+                        <div class="text-[10px] text-white/20 font-body uppercase tracking-[0.2em] mt-1">Projects</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl md:text-4xl font-heading italic text-white tracking-tight">100<span style="color:var(--accent)">%</span></div>
+                        <div class="text-[10px] text-white/20 font-body uppercase tracking-[0.2em] mt-1">Satisfaction</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <style>@keyframes fadeIn { to { opacity: 1; } }</style>
+    
+    <!-- ==================== MARQUEE ==================== -->
+    <section class="py-12 border-y border-white/[0.03] overflow-hidden relative z-10">
+        <div class="relative">
+            <div class="absolute left-0 top-0 bottom-0 w-40 bg-gradient-to-r from-[#060606] to-transparent z-10"></div>
+            <div class="absolute right-0 top-0 bottom-0 w-40 bg-gradient-to-l from-[#060606] to-transparent z-10"></div>
+            <div class="mq">
+                <span class="text-lg font-heading italic text-white/[0.06] whitespace-nowrap">Corporate Enterprises</span>
+                <span class="text-lg font-heading italic text-white/[0.06] whitespace-nowrap">Broadcast Networks</span>
+                <span class="text-lg font-heading italic text-white/[0.06] whitespace-nowrap">Government & PSUs</span>
+                <span class="text-lg font-heading italic text-white/[0.06] whitespace-nowrap">Educational Institutions</span>
+                <span class="text-lg font-heading italic text-white/[0.06] whitespace-nowrap">Healthcare Facilities</span>
+                <span class="text-lg font-heading italic text-white/[0.06] whitespace-nowrap">Hospitality & Retail</span>
+                <span class="text-lg font-heading italic text-white/[0.06] whitespace-nowrap">Corporate Enterprises</span>
+                <span class="text-lg font-heading italic text-white/[0.06] whitespace-nowrap">Broadcast Networks</span>
+                <span class="text-lg font-heading italic text-white/[0.06] whitespace-nowrap">Government & PSUs</span>
+                <span class="text-lg font-heading italic text-white/[0.06] whitespace-nowrap">Educational Institutions</span>
+                <span class="text-lg font-heading italic text-white/[0.06] whitespace-nowrap">Healthcare Facilities</span>
+                <span class="text-lg font-heading italic text-white/[0.06] whitespace-nowrap">Hospitality & Retail</span>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ==================== SERVICES ==================== -->
+    <section id="services" class="py-32 lg:py-40 relative z-10">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="grid lg:grid-cols-12 gap-12 lg:gap-16">
+                <div class="lg:col-span-4">
+                    <p class="sr text-[11px] font-body uppercase tracking-[0.2em] text-[#a4d65e] mb-4">Services</p>
+                    <h2 class="sr sr-d1 font-heading italic text-white text-4xl md:text-5xl leading-[0.92] tracking-[-0.02em]">What We<br/>Deliver</h2>
+                    <p class="sr sr-d2 text-white/25 text-sm font-body font-light leading-relaxed mt-6 max-w-xs">End-to-end integration across four critical technology domains for enterprises across India.</p>
+                </div>
+                
+                <div class="lg:col-span-8 grid sm:grid-cols-2 gap-4">
+                    <div class="sr card rounded-2xl p-8 group">
+                        <div class="w-11 h-11 rounded-xl lg flex items-center justify-center mb-7">
+                            <svg class="w-5 h-5 text-[#a4d65e]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
+                        </div>
+                        <h3 class="font-heading italic text-white text-2xl tracking-tight">Audio Visual</h3>
+                        <p class="mt-3 text-sm text-white/20 font-body font-light leading-relaxed">Conference rooms, digital signage, video walls, auditorium systems, and control room visualization.</p>
+                        <div class="flex flex-wrap gap-2 mt-5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 translate-y-1 group-hover:translate-y-0">
+                            <span class="text-[10px] text-white/30 font-body px-2.5 py-1 rounded-full border border-white/[0.06]">Conference</span>
+                            <span class="text-[10px] text-white/30 font-body px-2.5 py-1 rounded-full border border-white/[0.06]">Signage</span>
+                            <span class="text-[10px] text-white/30 font-body px-2.5 py-1 rounded-full border border-white/[0.06]">Video Walls</span>
+                        </div>
+                    </div>
+                    
+                    <div class="sr sr-d1 card rounded-2xl p-8 group">
+                        <div class="w-11 h-11 rounded-xl lg flex items-center justify-center mb-7">
+                            <svg class="w-5 h-5 text-[#a4d65e]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"/></svg>
+                        </div>
+                        <h3 class="font-heading italic text-white text-2xl tracking-tight">IT Infrastructure</h3>
+                        <p class="mt-3 text-sm text-white/20 font-body font-light leading-relaxed">Enterprise networking, structured cabling, server deployment, data centers, and security frameworks.</p>
+                        <div class="flex flex-wrap gap-2 mt-5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 translate-y-1 group-hover:translate-y-0">
+                            <span class="text-[10px] text-white/30 font-body px-2.5 py-1 rounded-full border border-white/[0.06]">Networking</span>
+                            <span class="text-[10px] text-white/30 font-body px-2.5 py-1 rounded-full border border-white/[0.06]">Data Center</span>
+                            <span class="text-[10px] text-white/30 font-body px-2.5 py-1 rounded-full border border-white/[0.06]">Cabling</span>
+                        </div>
+                    </div>
+                    
+                    <div class="sr sr-d2 card rounded-2xl p-8 group">
+                        <div class="w-11 h-11 rounded-xl lg flex items-center justify-center mb-7">
+                            <svg class="w-5 h-5 text-[#a4d65e]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                        </div>
+                        <h3 class="font-heading italic text-white text-2xl tracking-tight">Broadcast</h3>
+                        <p class="mt-3 text-sm text-white/20 font-body font-light leading-relaxed">Studio setups, live streaming, OB vans, switchers, cameras, and post-production suites.</p>
+                        <div class="flex flex-wrap gap-2 mt-5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 translate-y-1 group-hover:translate-y-0">
+                            <span class="text-[10px] text-white/30 font-body px-2.5 py-1 rounded-full border border-white/[0.06]">Studio</span>
+                            <span class="text-[10px] text-white/30 font-body px-2.5 py-1 rounded-full border border-white/[0.06]">Streaming</span>
+                            <span class="text-[10px] text-white/30 font-body px-2.5 py-1 rounded-full border border-white/[0.06]">OB Vans</span>
+                        </div>
+                    </div>
+                    
+                    <div class="sr sr-d3 card rounded-2xl p-8 group">
+                        <div class="w-11 h-11 rounded-xl lg flex items-center justify-center mb-7">
+                            <svg class="w-5 h-5 text-[#a4d65e]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"/></svg>
+                        </div>
+                        <h3 class="font-heading italic text-white text-2xl tracking-tight">Telecom</h3>
+                        <p class="mt-3 text-sm text-white/20 font-body font-light leading-relaxed">VoIP, EPABX, intercom networks, unified communications, and fiber optic infrastructure.</p>
+                        <div class="flex flex-wrap gap-2 mt-5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 translate-y-1 group-hover:translate-y-0">
+                            <span class="text-[10px] text-white/30 font-body px-2.5 py-1 rounded-full border border-white/[0.06]">VoIP</span>
+                            <span class="text-[10px] text-white/30 font-body px-2.5 py-1 rounded-full border border-white/[0.06]">EPABX</span>
+                            <span class="text-[10px] text-white/30 font-body px-2.5 py-1 rounded-full border border-white/[0.06]">Fiber</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ==================== WORK ==================== -->
+    <section id="work" class="py-32 lg:py-40 relative z-10 border-t border-white/[0.03]">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex items-end justify-between mb-16">
+                <div>
+                    <p class="sr text-[11px] font-body uppercase tracking-[0.2em] text-[#a4d65e] mb-4">Selected Work</p>
+                    <h2 class="sr sr-d1 font-heading italic text-white text-4xl md:text-5xl leading-[0.92] tracking-[-0.02em]">Projects</h2>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-5">
+                <div class="sr work-card" style="--card-grad-1:#1a1f14;--card-grad-2:#0d1108">
+                    <div class="overlay"></div>
+                    <div class="content">
+                        <p class="text-[10px] font-body uppercase tracking-[0.2em] text-white/25 mb-2">Fortune 500 HQ</p>
+                        <h3 class="font-heading italic text-white text-2xl tracking-tight">Multi-Room AV</h3>
+                        <div class="tags mt-3 flex flex-wrap gap-2">
+                            <span class="text-[10px] text-white/30 font-body px-2 py-0.5 rounded border border-white/[0.06]">12 Conference Rooms</span>
+                            <span class="text-[10px] text-white/30 font-body px-2 py-0.5 rounded border border-white/[0.06]">Digital Signage</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sr sr-d1 work-card" style="--card-grad-1:#141a1f;--card-grad-2:#080d12">
+                    <div class="overlay"></div>
+                    <div class="content">
+                        <p class="text-[10px] font-body uppercase tracking-[0.2em] text-white/25 mb-2">Broadcast Network</p>
+                        <h3 class="font-heading italic text-white text-2xl tracking-tight">Live Studio Setup</h3>
+                        <div class="tags mt-3 flex flex-wrap gap-2">
+                            <span class="text-[10px] text-white/30 font-body px-2 py-0.5 rounded border border-white/[0.06]">4K Streaming</span>
+                            <span class="text-[10px] text-white/30 font-body px-2 py-0.5 rounded border border-white/[0.06]">OB Van</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sr sr-d2 work-card" style="--card-grad-1:#1a1814;--card-grad-2:#0f0e08">
+                    <div class="overlay"></div>
+                    <div class="content">
+                        <p class="text-[10px] font-body uppercase tracking-[0.2em] text-white/25 mb-2">Healthcare Group</p>
+                        <h3 class="font-heading italic text-white text-2xl tracking-tight">Network Overhaul</h3>
+                        <div class="tags mt-3 flex flex-wrap gap-2">
+                            <span class="text-[10px] text-white/30 font-body px-2 py-0.5 rounded border border-white/[0.06]">Structured Cabling</span>
+                            <span class="text-[10px] text-white/30 font-body px-2 py-0.5 rounded border border-white/[0.06]">VoIP Migration</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ==================== PROCESS ==================== -->
+    <section id="process" class="py-32 lg:py-40 relative z-10 border-t border-white/[0.03]">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="max-w-2xl mb-20">
+                <p class="sr text-[11px] font-body uppercase tracking-[0.2em] text-[#a4d65e] mb-4">Process</p>
+                <h2 class="sr sr-d1 font-heading italic text-white text-4xl md:text-5xl leading-[0.92] tracking-[-0.02em]">How We<br/>Work</h2>
+            </div>
+            
+            <div class="relative max-w-3xl" id="process-wrap">
+                <div class="timeline-track"></div>
+                <div class="timeline-fill" id="t-fill"></div>
+                
+                <div class="space-y-20">
+                    <div class="sr process-step flex gap-8 items-start" data-step="0">
+                        <div class="step-node mt-1"></div>
+                        <div>
+                            <span class="text-[10px] font-body text-white/15 uppercase tracking-[0.2em]">Step 01</span>
+                            <h3 class="font-heading italic text-white text-2xl md:text-3xl tracking-tight mt-1">Discover</h3>
+                            <p class="text-white/20 text-sm font-body font-light leading-relaxed mt-3 max-w-md">On-site assessment of your environment, workflows, and technical requirements to understand the full scope.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="sr sr-d1 process-step flex gap-8 items-start" data-step="1">
+                        <div class="step-node mt-1"></div>
+                        <div>
+                            <span class="text-[10px] font-body text-white/15 uppercase tracking-[0.2em]">Step 02</span>
+                            <h3 class="font-heading italic text-white text-2xl md:text-3xl tracking-tight mt-1">Design</h3>
+                            <p class="text-white/20 text-sm font-body font-light leading-relaxed mt-3 max-w-md">Custom solution architecture with detailed BOQ, equipment specifications, and integration roadmap.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="sr sr-d2 process-step flex gap-8 items-start" data-step="2">
+                        <div class="step-node mt-1"></div>
+                        <div>
+                            <span class="text-[10px] font-body text-white/15 uppercase tracking-[0.2em]">Step 03</span>
+                            <h3 class="font-heading italic text-white text-2xl md:text-3xl tracking-tight mt-1">Deploy</h3>
+                            <p class="text-white/20 text-sm font-body font-light leading-relaxed mt-3 max-w-md">Certified technicians execute installation, commissioning, and testing with minimal business disruption.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="sr sr-d3 process-step flex gap-8 items-start" data-step="3">
+                        <div class="step-node mt-1"></div>
+                        <div>
+                            <span class="text-[10px] font-body text-white/15 uppercase tracking-[0.2em]">Step 04</span>
+                            <h3 class="font-heading italic text-white text-2xl md:text-3xl tracking-tight mt-1">Support</h3>
+                            <p class="text-white/20 text-sm font-body font-light leading-relaxed mt-3 max-w-md">AMC contracts, preventive maintenance, and rapid on-site response across Delhi NCR and major metros.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ==================== STATS ==================== -->
+    <section class="py-20 border-y border-white/[0.03] relative z-10">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="sr text-center">
+                    <div class="stat-n text-5xl md:text-6xl font-heading italic text-white tracking-tight" data-target="15">0</div>
+                    <div class="text-[10px] text-white/15 uppercase tracking-[0.2em] font-body mt-2">Years</div>
+                </div>
+                <div class="sr sr-d1 text-center">
+                    <div class="stat-n text-5xl md:text-6xl font-heading italic text-white tracking-tight" data-target="500">0</div>
+                    <div class="text-[10px] text-white/15 uppercase tracking-[0.2em] font-body mt-2">Projects</div>
+                </div>
+                <div class="sr sr-d2 text-center">
+                    <div class="stat-n text-5xl md:text-6xl font-heading italic text-white tracking-tight" data-target="50">0</div>
+                    <div class="text-[10px] text-white/15 uppercase tracking-[0.2em] font-body mt-2">Partners</div>
+                </div>
+                <div class="sr sr-d3 text-center">
+                    <div class="stat-n text-5xl md:text-6xl font-heading italic text-white tracking-tight" data-target="100">0</div>
+                    <div class="text-[10px] text-white/15 uppercase tracking-[0.2em] font-body mt-2">Satisfaction</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ==================== ABOUT ==================== -->
+    <section id="about" class="py-32 lg:py-40 relative z-10">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="grid lg:grid-cols-2 gap-20 items-start">
+                <div>
+                    <p class="sr text-[11px] font-body uppercase tracking-[0.2em] text-[#a4d65e] mb-4">About</p>
+                    <h2 class="sr sr-d1 font-heading italic text-white text-4xl md:text-5xl leading-[0.92] tracking-[-0.02em]">Built on Trust.<br/>Backed by Expertise.</h2>
+                    <p class="sr sr-d2 text-white/25 text-base font-body font-light leading-relaxed mt-6">
+                        Founded in New Delhi, Ambrosia Infotech has grown into one of India's most trusted system integrators. We engineer complete technology ecosystems that communicate, scale, and evolve with your organization.
+                    </p>
+                    <div class="sr sr-d3 mt-10 space-y-4">
+                        <div class="flex items-center gap-4">
+                            <svg class="w-4 h-4 text-[#a4d65e] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            <span class="text-sm text-white/40 font-body">Certified engineers for all major brands</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <svg class="w-4 h-4 text-[#a4d65e] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            <span class="text-sm text-white/40 font-body">Pan-India service with AMC contracts</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <svg class="w-4 h-4 text-[#a4d65e] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            <span class="text-sm text-white/40 font-body">Authorized channel partner for leading OEMs</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sr sr-d2 grid grid-cols-2 gap-4 lg:mt-16">
+                    <div class="card rounded-2xl p-7">
+                        <svg class="w-5 h-5 text-[#a4d65e] mb-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                        <h4 class="font-heading italic text-white text-lg">Tailored</h4>
+                        <p class="text-white/15 text-xs font-body font-light mt-1">Custom for your space and budget.</p>
+                    </div>
+                    <div class="card rounded-2xl p-7">
+                        <svg class="w-5 h-5 text-[#a4d65e] mb-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                        <h4 class="font-heading italic text-white text-lg">Rapid</h4>
+                        <p class="text-white/15 text-xs font-body font-light mt-1">Minimal downtime, maximum speed.</p>
+                    </div>
+                    <div class="card rounded-2xl p-7">
+                        <svg class="w-5 h-5 text-[#a4d65e] mb-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/></svg>
+                        <h4 class="font-heading italic text-white text-lg">Unified</h4>
+                        <p class="text-white/15 text-xs font-body font-light mt-1">One partner, all four domains.</p>
+                    </div>
+                    <div class="card rounded-2xl p-7">
+                        <svg class="w-5 h-5 text-[#a4d65e] mb-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                        <h4 class="font-heading italic text-white text-lg">Proven</h4>
+                        <p class="text-white/15 text-xs font-body font-light mt-1">Measurable performance gains.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ==================== TESTIMONIALS ==================== -->
+    <section class="py-32 lg:py-40 relative z-10 border-t border-white/[0.03]">
+        <div class="max-w-4xl mx-auto px-6 lg:px-12 text-center">
+            <p class="sr text-[11px] font-body uppercase tracking-[0.2em] text-[#a4d65e] mb-4">Testimonials</p>
+            
+            <div class="sr relative min-h-[260px] md:min-h-[200px]">
+                <div class="t-slide on">
+                    <blockquote class="font-heading italic text-white text-2xl md:text-3xl lg:text-[2.5rem] leading-[1.1] tracking-tight">
+                        "Ambrosia handled our complete AV upgrade across 12 conference rooms. Professional, on-time, and the systems have been running flawlessly."
+                    </blockquote>
+                    <div class="mt-8">
+                        <div class="text-sm font-body font-medium text-white">Rajesh K.</div>
+                        <div class="text-[11px] text-white/20 font-body mt-0.5">Facilities Head, Delhi NCR</div>
+                    </div>
+                </div>
+                <div class="t-slide">
+                    <blockquote class="font-heading italic text-white text-2xl md:text-3xl lg:text-[2.5rem] leading-[1.1] tracking-tight">
+                        "Five years of AMC with Ambrosia. Their response time is excellent and they know our setup inside-out."
+                    </blockquote>
+                    <div class="mt-8">
+                        <div class="text-sm font-body font-medium text-white">Anil S.</div>
+                        <div class="text-[11px] text-white/20 font-body mt-0.5">IT Manager, Government</div>
+                    </div>
+                </div>
+                <div class="t-slide">
+                    <blockquote class="font-heading italic text-white text-2xl md:text-3xl lg:text-[2.5rem] leading-[1.1] tracking-tight">
+                        "From structured cabling to our EPABX overhaul, everything delivered on schedule. Post-install support outstanding."
+                    </blockquote>
+                    <div class="mt-8">
+                        <div class="text-sm font-body font-medium text-white">Priya M.</div>
+                        <div class="text-[11px] text-white/20 font-body mt-0.5">Operations Director, Education</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sr flex justify-center gap-3 mt-10">
+                <button class="t-dot on" data-idx="0"></button>
+                <button class="t-dot" data-idx="1"></button>
+                <button class="t-dot" data-idx="2"></button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ==================== CONTACT ==================== -->
+    <section id="contact" class="py-32 lg:py-40 relative z-10 border-t border-white/[0.03]">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="grid lg:grid-cols-2 gap-20">
+                <div>
+                    <p class="sr text-[11px] font-body uppercase tracking-[0.2em] text-[#a4d65e] mb-4">Contact</p>
+                    <h2 class="sr sr-d1 font-heading italic text-white text-4xl md:text-5xl leading-[0.92] tracking-[-0.02em] mb-6">Get in Touch</h2>
+                    <p class="sr sr-d2 text-white/25 text-base font-body font-light mb-14 max-w-sm">Whether you need full system integration or a consultation, our team is ready.</p>
+                    
+                    <div class="space-y-8">
+                        <div class="sr flex items-start gap-5">
+                            <div class="w-10 h-10 rounded-xl lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-4 h-4 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                            </div>
+                            <div>
+                                <div class="text-[10px] text-white/15 uppercase tracking-[0.2em] font-body mb-1">Email</div>
+                                <div class="text-white/60 text-sm font-body">directorambrosiainfotech@gmail.com</div>
+                            </div>
+                        </div>
+                        <div class="sr sr-d1 flex items-start gap-5">
+                            <div class="w-10 h-10 rounded-xl lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-4 h-4 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                            </div>
+                            <div>
+                                <div class="text-[10px] text-white/15 uppercase tracking-[0.2em] font-body mb-1">Phone</div>
+                                <div class="text-white/60 text-sm font-body">+91-9310401911</div>
+                            </div>
+                        </div>
+                        <div class="sr sr-d2 flex items-start gap-5">
+                            <div class="w-10 h-10 rounded-xl lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-4 h-4 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            </div>
+                            <div>
+                                <div class="text-[10px] text-white/15 uppercase tracking-[0.2em] font-body mb-1">Office</div>
+                                <div class="text-white/60 text-sm font-body leading-relaxed">DDA Shopping Complex, D-1 Block,<br/>Janakpuri, New Delhi - 110046</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sr sr-d2">
+                    <form class="space-y-5" onsubmit="event.preventDefault();">
+                        <div class="grid sm:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-[10px] text-white/15 uppercase tracking-[0.2em] font-body mb-2">Name</label>
+                                <input type="text" class="field w-full rounded-xl px-4 py-3.5 font-body text-sm" placeholder="Your name">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] text-white/15 uppercase tracking-[0.2em] font-body mb-2">Company</label>
+                                <input type="text" class="field w-full rounded-xl px-4 py-3.5 font-body text-sm" placeholder="Company name">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] text-white/15 uppercase tracking-[0.2em] font-body mb-2">Email</label>
+                            <input type="email" class="field w-full rounded-xl px-4 py-3.5 font-body text-sm" placeholder="you@company.com">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] text-white/15 uppercase tracking-[0.2em] font-body mb-2">Service</label>
+                            <select class="field w-full rounded-xl px-4 py-3.5 font-body text-sm appearance-none" style="background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22rgba(255,255,255,0.15)%22 stroke-width=%222%22%3E%3Cpath d=%22M6 9l6 6 6-6%22/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 16px center;">
+                                <option value="" class="bg-[#111]">Select a service</option>
+                                <option value="av" class="bg-[#111]">Audio Visual</option>
+                                <option value="it" class="bg-[#111]">IT Infrastructure</option>
+                                <option value="broadcast" class="bg-[#111]">Broadcast</option>
+                                <option value="telecom" class="bg-[#111]">Telecom</option>
+                                <option value="multiple" class="bg-[#111]">Multiple Services</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] text-white/15 uppercase tracking-[0.2em] font-body mb-2">Message</label>
+                            <textarea class="field w-full rounded-xl px-4 py-3.5 h-32 resize-none font-body text-sm" placeholder="Tell us about your project..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-fill w-full py-3.5 rounded-full text-sm font-body">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="py-10 border-t border-white/[0.03] relative z-10">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="logo-bars scale-75"><span></span><span></span><span></span></div>
+                    <span class="font-heading italic text-white text-sm">Ambrosia<span style="color:var(--accent)"> Infotech</span></span>
+                </div>
+                <p class="text-[11px] text-white/12 font-body tracking-wide">&copy; 2025 Ambrosia Infotech. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- ==================== SCRIPTS ==================== -->
+    <script>
+        /* ============================================
+           GENERATIVE ART BACKGROUND
+           Flowing organic ribbons with sine wave mesh
+           ============================================ */
+        (function() {
+            const canvas = document.getElementById('art-canvas');
+            const ctx = canvas.getContext('2d');
+            let w, h, time = 0;
+            let mouseX = 0.5, mouseY = 0.5;
+            let active = true;
+            
+            function resize() {
+                w = canvas.width = window.innerWidth;
+                h = canvas.height = window.innerHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+            
+            document.addEventListener('mousemove', e => {
+                mouseX += (e.clientX / w - mouseX) * 0.03;
+                mouseY += (e.clientY / h - mouseY) * 0.03;
+            });
+            
+            // Simplex-like noise function
+            function noise(x, y, t) {
+                return Math.sin(x * 0.5 + t) * Math.cos(y * 0.3 + t * 0.7) * 0.5 +
+                       Math.sin(x * 0.8 - t * 0.5) * Math.cos(y * 0.6 + t * 0.3) * 0.3 +
+                       Math.sin(x * 1.2 + t * 1.3) * 0.2;
+            }
+            
+            function draw() {
+                if (!active) return;
+                
+                ctx.fillStyle = '#060606';
+                ctx.fillRect(0, 0, w, h);
+                
+                const cols = Math.floor(w / 3) + 1;
+                const rows = Math.floor(h / 3) + 1;
+                const t = time * 0.0003;
+                
+                // Draw flowing field lines
+                for (let y = 0; y < rows; y += 2) {
+                    for (let x = 0; x < cols; x += 2) {
+                        const px = x * 3;
+                        const py = y * 3;
+                        
+                        const n = noise(
+                            x * 0.015 + mouseX * 2,
+                            y * 0.015 + mouseY * 2,
+                            t
+                        );
+                        
+                        const brightness = (n + 1) * 0.5;
+                        
+                        if (brightness > 0.55) {
+                            const alpha = (brightness - 0.55) * 0.15;
+                            const size = brightness * 1.8;
+                            
+                            // Lime-tinted highlights
+                            if (brightness > 0.75 && Math.random() > 0.97) {
+                                ctx.fillStyle = `rgba(164, 214, 94, ${alpha * 0.6})`;
+                            } else {
+                                ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.3})`;
+                            }
+                            
+                            ctx.fillRect(px, py, size, size);
+                        }
+                    }
+                }
+                
+                // Draw flowing ribbon lines
+                ctx.lineWidth = 0.5;
+                for (let i = 0; i < 8; i++) {
+                    ctx.beginPath();
+                    const yOffset = (i / 8) * h + Math.sin(t + i) * 50;
+                    
+                    for (let x = 0; x < w; x += 5) {
+                        const y = yOffset + Math.sin(x * 0.003 + t * (0.5 + i * 0.1)) * 80 +
+                                  Math.sin(x * 0.008 + t * 0.3 + i) * 40 +
+                                  (mouseY - 0.5) * 30 * Math.sin(x * 0.01);
+                        
+                        if (x === 0) ctx.moveTo(x, y);
+                        else ctx.lineTo(x, y);
+                    }
+                    
+                    const alpha = 0.03 + Math.sin(t + i * 0.7) * 0.02;
+                    if (i === 2 || i === 5) {
+                        ctx.strokeStyle = `rgba(164, 214, 94, ${alpha * 1.5})`;
+                    } else {
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
+                    }
+                    ctx.stroke();
+                }
+                
+                // Large organic blobs
+                for (let i = 0; i < 3; i++) {
+                    const bx = w * (0.2 + i * 0.3 + Math.sin(t * 0.5 + i * 2) * 0.1);
+                    const by = h * (0.3 + Math.cos(t * 0.3 + i * 1.5) * 0.2);
+                    const br = Math.min(w, h) * (0.3 + Math.sin(t * 0.2 + i) * 0.1);
+                    
+                    const g = ctx.createRadialGradient(bx, by, 0, bx, by, br);
+                    if (i === 1) {
+                        g.addColorStop(0, 'rgba(20, 26, 14, 0.4)');
+                        g.addColorStop(0.5, 'rgba(14, 18, 10, 0.15)');
+                    } else {
+                        g.addColorStop(0, 'rgba(14, 16, 18, 0.3)');
+                        g.addColorStop(0.5, 'rgba(10, 12, 14, 0.1)');
+                    }
+                    g.addColorStop(1, 'transparent');
+                    
+                    ctx.fillStyle = g;
+                    ctx.fillRect(0, 0, w, h);
+                }
+                
+                time++;
+                requestAnimationFrame(draw);
+            }
+            draw();
+            
+            document.addEventListener('visibilitychange', () => {
+                active = !document.hidden;
+                if (active) draw();
+            });
+        })();
+        
+        /* ============================================
+           NAVBAR
+           ============================================ */
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('nav-scrolled', window.scrollY > 60);
+        });
+        
+        /* ============================================
+           MOBILE MENU
+           ============================================ */
+        document.getElementById('menu-btn').addEventListener('click', () => {
+            document.getElementById('mob-menu').classList.toggle('open');
+        });
+        document.querySelectorAll('.mob-link').forEach(l => {
+            l.addEventListener('click', () => document.getElementById('mob-menu').classList.remove('open'));
+        });
+        
+        /* ============================================
+           SCROLL REVEAL
+           ============================================ */
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+        }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.sr').forEach(el => obs.observe(el));
+        
+        /* ============================================
+           STAT COUNTERS
+           ============================================ */
+        let counted = false;
+        const cObs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting && !counted) {
+                    counted = true;
+                    document.querySelectorAll('.stat-n[data-target]').forEach(el => {
+                        const t = parseInt(el.dataset.target);
+                        let cur = 0;
+                        const step = t / 70;
+                        const tick = () => {
+                            cur += step;
+                            el.textContent = (cur < t ? Math.floor(cur) : t) + (t === 100 ? '%' : '+');
+                            if (cur < t) requestAnimationFrame(tick);
+                        };
+                        tick();
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+        document.querySelectorAll('.stat-n[data-target]').forEach(el => cObs.observe(el));
+        
+        /* ============================================
+           PROCESS TIMELINE
+           ============================================ */
+        const pWrap = document.getElementById('process-wrap');
+        const tFill = document.getElementById('t-fill');
+        
+        if (pWrap && tFill) {
+            window.addEventListener('scroll', () => {
+                const rect = pWrap.getBoundingClientRect();
+                const h = pWrap.offsetHeight;
+                const vc = window.innerHeight / 2;
+                const prog = Math.max(0, Math.min(1, (vc - rect.top + 100) / (h - 200)));
+                tFill.style.height = (prog * 100) + '%';
+                
+                document.querySelectorAll('.process-step').forEach(step => {
+                    const sRect = step.getBoundingClientRect();
+                    const node = step.querySelector('.step-node');
+                    node.classList.toggle('lit', sRect.top < vc + 80);
+                });
+            });
+        }
+        
+        /* ============================================
+           TESTIMONIAL CAROUSEL
+           ============================================ */
+        const slides = document.querySelectorAll('.t-slide');
+        const dots = document.querySelectorAll('.t-dot');
+        let tIdx = 0;
+        let autoT;
+        
+        function show(i) {
+            slides.forEach((s, j) => s.classList.toggle('on', j === i));
+            dots.forEach((d, j) => d.classList.toggle('on', j === i));
+            tIdx = i;
+        }
+        
+        dots.forEach((d, i) => d.addEventListener('click', () => {
+            show(i);
+            clearInterval(autoT);
+            startAuto();
+        }));
+        
+        function startAuto() {
+            autoT = setInterval(() => show((tIdx + 1) % slides.length), 5500);
+        }
+        startAuto();
+    </script>
+</body>
+</html>
